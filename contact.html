@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>contact — lapidary</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23c8963c'>◈</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #070706; --border: #1c1a16; --border2: #272420;
+    --gold: #c8963c; --gold-mid: #a07838; --gold-deep: #2e2208;
+    --text: #d0c8b4; --text-dim: #9a9080; --text-faint: #3a3828;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Syne', sans-serif; -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; }
+  nav { height: 60px; border-bottom: 1px solid var(--border); padding: 0 40px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { font-size: 12px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); text-decoration: none; display: flex; align-items: center; gap: 12px; }
+  .nav-line { width: 24px; height: 1px; background: var(--gold-mid); }
+  .back-link { font-size: 11px; color: var(--text-faint); letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; }
+  .back-link:hover { color: var(--text-dim); }
+  .content { max-width: 520px; margin: 0 auto; padding: 80px 40px; flex: 1; }
+  .doc-label { font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold-mid); margin-bottom: 12px; }
+  h1 { font-size: 32px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text); margin-bottom: 16px; }
+  p { font-size: 15px; color: var(--text-dim); line-height: 1.8; margin-bottom: 32px; }
+  .contact-box { background: #0d0c0a; border: 1px solid var(--border2); border-radius: 4px; padding: 28px 32px; }
+  .contact-label { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 10px; }
+  .contact-email { font-size: 16px; font-weight: 600; color: var(--gold); letter-spacing: 0.04em; text-decoration: none; display: block; transition: color 0.2s; }
+  .contact-email:hover { color: var(--text); }
+  .contact-note { font-size: 12px; color: var(--text-dim); letter-spacing: 0.06em; margin-top: 10px; }
+  footer { border-top: 1px solid var(--border); padding: 28px 40px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .footer-links a { font-size: 11px; color: var(--text-faint); letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; margin-right: 20px; }
+  .footer-links a:hover { color: var(--text-dim); }
+  @media (max-width: 640px) { nav, .content, footer { padding-left: 20px; padding-right: 20px; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html"><span class="nav-line"></span>lapidary<span class="nav-line"></span></a>
+  <a class="back-link" href="index.html">← back</a>
+</nav>
+
+<div class="content">
+  <div class="doc-label">get in touch</div>
+  <h1>Contact</h1>
+  <p>Have a question, a privacy or data request, or just want to say hello? Send an email and we'll get back to you within 30 days.</p>
+
+  <div class="contact-box">
+    <div class="contact-label">email</div>
+    <a class="contact-email" href="mailto:lapidaryinfo@gmail.com">lapidaryinfo@gmail.com</a>
+    <div class="contact-note">click to open your email app</div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="index.html">home</a>
+    <a href="tos.html">terms of service</a>
+    <a href="privacy.html">privacy policy</a>
+  </div>
+  <div style="font-size:11px;color:var(--text-dim);letter-spacing:0.06em;">© 2026 lapidary</div>
+</footer>
+
+</body>
+</html>

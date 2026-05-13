@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>lapidary — organise your gemstone collection</title>
+<meta name="description" content="An easy and pleasant way to organise your gemstone collection. Track your stones, bracelets, gem bundles and more." />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23c8963c'>◈</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg:         #070706;
+    --bg2:        #0d0c0a;
+    --bg3:        #131210;
+    --border:     #1c1a16;
+    --border2:    #272420;
+    --gold:       #c8963c;
+    --gold-mid:   #a07838;
+    --gold-deep:  #2e2208;
+    --text:       #d0c8b4;
+    --text-dim:   #9a9080;
+    --text-faint: #6a6458;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Syne', sans-serif; -webkit-font-smoothing: antialiased; }
+
+  /* NAV */
+  nav {
+    height: 60px; border-bottom: 1px solid var(--border);
+    padding: 0 40px; position: sticky; top: 0; background: var(--bg);
+    z-index: 20; display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 14px; font-size: 12px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); text-decoration: none; }
+  .nav-logo-line { width: 24px; height: 1px; background: var(--gold-mid); }
+  .nav-cta {
+    background: var(--gold-deep); border: 1px solid var(--gold-mid); border-radius: 3px;
+    color: var(--gold); padding: 8px 20px; font-size: 11px; font-family: inherit;
+    font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .nav-cta:hover { background: #3e2e0e; border-color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    max-width: 900px; margin: 0 auto;
+    padding: 100px 40px 80px;
+    text-align: center;
+  }
+  .hero-eyebrow {
+    font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--gold-mid); margin-bottom: 24px;
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+  }
+  .hero-eyebrow-line { width: 32px; height: 1px; background: var(--gold-mid); }
+  .hero-title {
+    font-size: clamp(32px, 5.5vw, 64px); font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--text); line-height: 1.1; margin-bottom: 24px;
+  }
+  .hero-title span { color: var(--gold); }
+  .hero-sub {
+    font-size: 18px; color: var(--text-dim); line-height: 1.7;
+    max-width: 520px; margin: 0 auto 48px;
+  }
+  .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--gold-deep); border: 1px solid var(--gold-mid); border-radius: 3px;
+    color: var(--gold); padding: 14px 36px; font-size: 13px; font-family: inherit;
+    font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .btn-primary:hover { background: #3e2e0e; border-color: var(--gold); }
+  .btn-ghost {
+    background: none; border: 1px solid var(--border2); border-radius: 3px;
+    color: var(--text-dim); padding: 14px 36px; font-size: 13px; font-family: inherit;
+    font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--gold-mid); color: var(--text); }
+
+  /* GLYPH DIVIDER */
+  .divider {
+    text-align: center; color: var(--text-faint); font-size: 20px;
+    padding: 16px 0; letter-spacing: 0.3em;
+  }
+
+  /* FEATURES */
+  .features { max-width: 960px; margin: 0 auto; padding: 80px 40px; }
+  .section-label {
+    font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--gold-mid); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .section-title {
+    font-size: clamp(24px, 4vw, 40px); font-weight: 700; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--text); margin-bottom: 56px; max-width: 500px;
+  }
+
+  .feature-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2px; }
+  .feature-card {
+    background: var(--bg2); padding: 32px;
+    border: 1px solid var(--border);
+    transition: border-color 0.2s;
+  }
+  .feature-card:hover { border-color: var(--border2); }
+  .feature-icon { font-size: 24px; margin-bottom: 16px; color: var(--gold); }
+  .feature-name { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text); margin-bottom: 10px; }
+  .feature-desc { font-size: 14px; color: var(--text-dim); line-height: 1.7; }
+
+  /* TYPES SECTION */
+  .types { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .types-inner { max-width: 960px; margin: 0 auto; padding: 80px 40px; }
+  .types-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 2px; margin-top: 56px; }
+  .type-card {
+    background: var(--bg3); padding: 28px 24px;
+    border: 1px solid var(--border);
+  }
+  .type-glyph { font-size: 28px; color: var(--gold); margin-bottom: 12px; }
+  .type-name { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text); margin-bottom: 6px; }
+  .type-desc { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
+
+  /* FREE SECTION */
+  .free-section { max-width: 700px; margin: 0 auto; padding: 100px 40px; text-align: center; }
+  .free-title { font-size: clamp(28px, 4vw, 48px); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text); margin-bottom: 16px; line-height: 1.15; }
+  .free-title span { color: var(--gold); }
+  .free-sub { font-size: 16px; color: var(--text-dim); line-height: 1.7; margin-bottom: 40px; }
+  .free-note { font-size: 12px; color: var(--text-dim); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 16px; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border); padding: 32px 40px;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+  }
+  .footer-logo { font-size: 11px; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold-mid); }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { font-size: 11px; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--text-dim); }
+  .footer-copy { font-size: 11px; color: var(--text-dim); letter-spacing: 0.06em; }
+
+  @media (max-width: 640px) {
+    nav { padding: 0 20px; }
+    .hero { padding: 60px 20px 60px; }
+    .features, .types-inner, .free-section { padding-left: 20px; padding-right: 20px; }
+    footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">
+    <span class="nav-logo-line"></span>lapidary<span class="nav-logo-line"></span>
+  </a>
+  <a class="nav-cta" href="https://lapidary.netlify.app">sign in</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">
+    <span class="hero-eyebrow-line"></span>
+    your collection, organised
+    <span class="hero-eyebrow-line"></span>
+  </div>
+  <h1 class="hero-title">
+    an easy way to organise<br />your <span>gemstone</span> collection
+  </h1>
+  <p class="hero-sub">
+    Track your stones, bracelets, and gem bundles. Add photos, notes, and descriptions. Filter by category, deity, or intention. Always with you, on any device.
+  </p>
+  <div class="hero-actions">
+    <a class="btn-primary" href="https://lapidary.netlify.app">create free account</a>
+    <a class="btn-ghost" href="https://lapidary.netlify.app">sign in</a>
+  </div>
+</section>
+
+<div class="divider">◈ · · · ◈ · · · ◈</div>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="section-label">features</div>
+  <h2 class="section-title">everything your collection needs</h2>
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="feature-icon">◈</div>
+      <div class="feature-name">detailed entries</div>
+      <div class="feature-desc">Name, type, subtype, count, description, photos, tags, and categories. Everything you need to remember each stone.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⊞</div>
+      <div class="feature-name">grid & list views</div>
+      <div class="feature-desc">Browse your collection as a visual gallery or a compact list. Switch instantly depending on what you need.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔍</div>
+      <div class="feature-name">search & filter</div>
+      <div class="feature-desc">Filter by type, category, or tag. Search by name or description. Find any stone in seconds.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">◎</div>
+      <div class="feature-name">gem bundles</div>
+      <div class="feature-desc">Group stones into named bundles — sleep pouches, altar sets, travel kits. Photos pull automatically from the member stones.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📷</div>
+      <div class="feature-name">photo gallery</div>
+      <div class="feature-desc">Up to 3 photos per stone. Reorder them, view full screen, and see multi-photo thumbnails right on the card.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📝</div>
+      <div class="feature-name">collection notes</div>
+      <div class="feature-desc">A personal notes space for your collection. Supports markdown — headings, lists, bold, quotes, and more.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📖</div>
+      <div class="feature-name">history log</div>
+      <div class="feature-desc">Every stone added or removed is logged automatically. A record of your collection over time.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">☁</div>
+      <div class="feature-name">cloud sync</div>
+      <div class="feature-desc">Your collection lives in the cloud. Sign in from any device — phone, tablet, desktop — and everything is there.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">✦</div>
+      <div class="feature-name">completely free</div>
+      <div class="feature-desc">No subscription, no premium tier. Lapidary is free to use. If you love it, you can support the project.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TYPES -->
+<section class="types">
+  <div class="types-inner">
+    <div class="section-label">collection types</div>
+    <h2 class="section-title">built for how collectors actually collect</h2>
+    <div class="types-grid">
+      <div class="type-card">
+        <div class="type-glyph">◈</div>
+        <div class="type-name">gemstones</div>
+        <div class="type-desc">Raw, tumbled, wand, and more. With subtypes, counts, and full descriptions.</div>
+      </div>
+      <div class="type-card">
+        <div class="type-glyph">○</div>
+        <div class="type-name">bracelets</div>
+        <div class="type-desc">Your wearable collection, tracked separately with their own properties and photos.</div>
+      </div>
+      <div class="type-card">
+        <div class="type-glyph">◎</div>
+        <div class="type-name">gem bundles</div>
+        <div class="type-desc">Groups of stones with a shared purpose — sleep pouches, ritual sets, travel kits.</div>
+      </div>
+      <div class="type-card">
+        <div class="type-glyph">+</div>
+        <div class="type-name">coming soon</div>
+        <div class="type-desc">Custom collection types so you can organise exactly what you have, the way you want.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FREE -->
+<section class="free-section">
+  <h2 class="free-title">free to use.<br /><span>always.</span></h2>
+  <p class="free-sub">Lapidary is and will remain free. No ads, no premium tier, no data selling. If you find it useful, you can buy me a coffee — but there's no pressure.</p>
+  <div class="hero-actions">
+    <a class="btn-primary" href="https://lapidary.netlify.app">get started free</a>
+  </div>
+  <p class="free-note">no credit card · no subscription · no catch</p>
+</section>
+
+<footer>
+  <div class="footer-logo">◈ lapidary</div>
+  <div class="footer-links">
+    <a href="tos.html">terms of service</a>
+    <a href="privacy.html">privacy policy</a>
+    <a href="contact.html">contact</a>
+    <a href="https://lapidary.netlify.app">open app</a>
+  </div>
+  <div class="footer-copy">© 2026 lapidary</div>
+</footer>
+
+</body>
+</html>
