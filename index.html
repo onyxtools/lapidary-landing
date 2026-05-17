@@ -19,8 +19,9 @@
     --gold-mid:   #a07838;
     --gold-deep:  #2e2208;
     --text:       #d0c8b4;
-    --text-dim:   #9a9080;
-    --text-faint: #6a6458;
+    --text-dim:   #b8ac9c;
+    --text-faint: #6a6050;
+    --gold-hover: var(--gold-hover);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--bg); color: var(--text); font-family: 'Syne', sans-serif; -webkit-font-smoothing: antialiased; }
@@ -31,15 +32,15 @@
     padding: 0 40px; position: sticky; top: 0; background: var(--bg);
     z-index: 20; display: flex; align-items: center; justify-content: space-between;
   }
-  .nav-logo { display: flex; align-items: center; gap: 14px; font-size: 12px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); text-decoration: none; }
+  .nav-logo { display: flex; align-items: center; gap: 14px; font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); text-decoration: none; }
   .nav-logo-line { width: 24px; height: 1px; background: var(--gold-mid); }
   .nav-cta {
     background: var(--gold-deep); border: 1px solid var(--gold-mid); border-radius: 3px;
-    color: var(--gold); padding: 8px 20px; font-size: 11px; font-family: inherit;
+    color: var(--gold); padding: 8px 20px; font-size: 13px; font-family: inherit;
     font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
     text-decoration: none; transition: all 0.2s;
   }
-  .nav-cta:hover { background: #3e2e0e; border-color: var(--gold); }
+  .nav-cta:hover { background: var(--gold-hover); border-color: var(--gold); }
 
   /* HERO */
   .hero {
@@ -48,7 +49,7 @@
     text-align: center;
   }
   .hero-eyebrow {
-    font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase;
+    font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase;
     color: var(--gold-mid); margin-bottom: 24px;
     display: flex; align-items: center; justify-content: center; gap: 12px;
   }
@@ -70,7 +71,7 @@
     font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
     text-decoration: none; transition: all 0.2s;
   }
-  .btn-primary:hover { background: #3e2e0e; border-color: var(--gold); }
+  .btn-primary:hover { background: var(--gold-hover); border-color: var(--gold); }
   .btn-ghost {
     background: none; border: 1px solid var(--border2); border-radius: 3px;
     color: var(--text-dim); padding: 14px 36px; font-size: 13px; font-family: inherit;
@@ -82,13 +83,13 @@
   /* GLYPH DIVIDER */
   .divider {
     text-align: center; color: var(--text-faint); font-size: 20px;
-    padding: 16px 0; letter-spacing: 0.3em;
+    padding: 16px 0; letter-spacing: 0.22em;
   }
 
   /* FEATURES */
   .features { max-width: 960px; margin: 0 auto; padding: 80px 40px; }
   .section-label {
-    font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase;
+    font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
     color: var(--gold-mid); margin-bottom: 16px;
     display: flex; align-items: center; gap: 12px;
   }
@@ -133,11 +134,11 @@
     border-top: 1px solid var(--border); padding: 32px 40px;
     display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
   }
-  .footer-logo { font-size: 11px; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold-mid); }
+  .footer-logo { font-size: 13px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-mid); }
   .footer-links { display: flex; gap: 24px; }
-  .footer-links a { font-size: 11px; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: color 0.2s; }
+  .footer-links a { font-size: 13px; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: color 0.2s; }
   .footer-links a:hover { color: var(--text-dim); }
-  .footer-copy { font-size: 11px; color: var(--text-dim); letter-spacing: 0.06em; }
+  .footer-copy { font-size: 13px; color: var(--text-dim); letter-spacing: 0.06em; }
 
   @media (max-width: 640px) {
     nav { padding: 0 20px; }
