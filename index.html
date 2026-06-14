@@ -3,283 +3,225 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>lapidary — organise your gemstone collection</title>
-<meta name="description" content="An easy and pleasant way to organise your gemstone collection. Track your stones, bracelets, gem bundles and more." />
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23c8963c'>◈</text></svg>" />
+<title>Rove — manage all your collections digitally in one place</title>
+<meta name="description" content="Rove is a free personal collection manager. Create custom tabs, add entries with photos, categories and tags, and access your collection from any device." />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◈</text></svg>" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --bg:         #070706;
-    --bg2:        #0d0c0a;
-    --bg3:        #131210;
-    --border:     #1c1a16;
-    --border2:    #272420;
-    --gold:       #c8963c;
-    --gold-mid:   #a07838;
-    --gold-deep:  #2e2208;
-    --text:       #d0c8b4;
-    --text-dim:   #b8ac9c;
-    --text-faint: #6a6050;
-    --gold-hover: var(--gold-hover);
+    --bg:        #111111;
+    --surface:   #1c1c1c;
+    --surface-2: #222222;
+    --border:    rgba(255,255,255,0.07);
+    --border-2:  rgba(255,255,255,0.12);
+    --text:      #efefef;
+    --text-2:    #888888;
+    --text-3:    #444444;
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--bg); color: var(--text); font-family: 'Syne', sans-serif; -webkit-font-smoothing: antialiased; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { text-decoration: none; color: inherit; }
 
   /* NAV */
-  nav {
-    height: 60px; border-bottom: 1px solid var(--border);
-    padding: 0 40px; position: sticky; top: 0; background: var(--bg);
-    z-index: 20; display: flex; align-items: center; justify-content: space-between;
-  }
-  .nav-logo { display: flex; align-items: center; gap: 14px; font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); text-decoration: none; }
-  .nav-logo-line { width: 24px; height: 1px; background: var(--gold-mid); }
-  .nav-cta {
-    background: var(--gold-deep); border: 1px solid var(--gold-mid); border-radius: 3px;
-    color: var(--gold); padding: 8px 20px; font-size: 13px; font-family: inherit;
-    font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
-    text-decoration: none; transition: all 0.2s;
-  }
-  .nav-cta:hover { background: var(--gold-hover); border-color: var(--gold); }
+  nav { position: sticky; top: 0; z-index: 50; background: rgba(17,17,17,0.88); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 40px; height: 56px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { display: flex; align-items: center; gap: 7px; font-size: 15px; font-weight: 600; color: var(--text); }
+  .nav-logo-dot { width: 6px; height: 6px; background: var(--text); border-radius: 50%; }
+  .nav-links { display: flex; align-items: center; gap: 6px; }
+  .nav-link { color: var(--text-2); font-size: 13px; padding: 6px 10px; border-radius: 5px; transition: color 0.15s; }
+  .nav-link:hover { color: var(--text); }
+  .nav-cta { background: var(--text); color: var(--bg); border-radius: 6px; padding: 7px 16px; font-size: 13px; font-weight: 600; transition: opacity 0.15s; }
+  .nav-cta:hover { opacity: 0.88; }
 
   /* HERO */
-  .hero {
-    max-width: 900px; margin: 0 auto;
-    padding: 100px 40px 80px;
-    text-align: center;
-  }
-  .hero-eyebrow {
-    font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--gold-mid); margin-bottom: 24px;
-    display: flex; align-items: center; justify-content: center; gap: 12px;
-  }
-  .hero-eyebrow-line { width: 32px; height: 1px; background: var(--gold-mid); }
-  .hero-title {
-    font-size: clamp(32px, 5.5vw, 64px); font-weight: 700;
-    letter-spacing: 0.06em; text-transform: uppercase;
-    color: var(--text); line-height: 1.1; margin-bottom: 24px;
-  }
-  .hero-title span { color: var(--gold); }
-  .hero-sub {
-    font-size: 18px; color: var(--text-dim); line-height: 1.7;
-    max-width: 520px; margin: 0 auto 48px;
-  }
-  .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-  .btn-primary {
-    background: var(--gold-deep); border: 1px solid var(--gold-mid); border-radius: 3px;
-    color: var(--gold); padding: 14px 36px; font-size: 13px; font-family: inherit;
-    font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
-    text-decoration: none; transition: all 0.2s;
-  }
-  .btn-primary:hover { background: var(--gold-hover); border-color: var(--gold); }
-  .btn-ghost {
-    background: none; border: 1px solid var(--border2); border-radius: 3px;
-    color: var(--text-dim); padding: 14px 36px; font-size: 13px; font-family: inherit;
-    font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
-    text-decoration: none; transition: all 0.2s;
-  }
-  .btn-ghost:hover { border-color: var(--gold-mid); color: var(--text); }
+  .hero { max-width: 760px; margin: 0 auto; padding: 100px 40px 80px; text-align: center; }
+  .hero-eyebrow { font-size: 12px; font-weight: 500; color: var(--text-2); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 20px; }
+  .hero-title { font-size: clamp(36px, 5vw, 60px); font-weight: 600; color: var(--text); line-height: 1.12; letter-spacing: -0.02em; margin-bottom: 20px; }
+  .hero-sub { font-size: 17px; color: var(--text-2); line-height: 1.7; max-width: 500px; margin: 0 auto 36px; }
+  .hero-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary { background: var(--text); color: var(--bg); border: none; border-radius: 7px; padding: 11px 24px; font-size: 14px; font-weight: 600; cursor: pointer; transition: opacity 0.15s; display: inline-block; }
+  .btn-primary:hover { opacity: 0.88; }
+  .btn-secondary { background: transparent; color: var(--text-2); border: 1px solid var(--border-2); border-radius: 7px; padding: 10px 20px; font-size: 14px; transition: all 0.15s; display: inline-block; }
+  .btn-secondary:hover { color: var(--text); border-color: rgba(255,255,255,0.25); }
+  .hero-note { font-size: 12px; color: var(--text-3); margin-top: 14px; }
 
-  /* GLYPH DIVIDER */
-  .divider {
-    text-align: center; color: var(--text-faint); font-size: 20px;
-    padding: 16px 0; letter-spacing: 0.22em;
-  }
+  /* DIVIDER */
+  .section-divider { height: 1px; background: var(--border); max-width: 960px; margin: 0 auto; }
 
   /* FEATURES */
   .features { max-width: 960px; margin: 0 auto; padding: 80px 40px; }
-  .section-label {
-    font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--gold-mid); margin-bottom: 16px;
-    display: flex; align-items: center; gap: 12px;
-  }
-  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-  .section-title {
-    font-size: clamp(24px, 4vw, 40px); font-weight: 700; letter-spacing: 0.06em;
-    text-transform: uppercase; color: var(--text); margin-bottom: 56px; max-width: 500px;
-  }
+  .section-label { font-size: 11px; font-weight: 500; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+  .section-title { font-size: clamp(22px, 3vw, 32px); font-weight: 600; color: var(--text); letter-spacing: -0.01em; margin-bottom: 48px; line-height: 1.2; }
+  .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .feature-card { background: var(--bg); padding: 28px; transition: background 0.15s; }
+  .feature-card:hover { background: var(--surface); }
+  .feature-icon { font-size: 18px; color: var(--text-2); margin-bottom: 14px; }
+  .feature-name { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .feature-desc { font-size: 13px; color: var(--text-2); line-height: 1.6; }
 
-  .feature-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2px; }
-  .feature-card {
-    background: var(--bg2); padding: 32px;
-    border: 1px solid var(--border);
-    transition: border-color 0.2s;
-  }
-  .feature-card:hover { border-color: var(--border2); }
-  .feature-icon { font-size: 24px; margin-bottom: 16px; color: var(--gold); }
-  .feature-name { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text); margin-bottom: 10px; }
-  .feature-desc { font-size: 14px; color: var(--text-dim); line-height: 1.7; }
-
-  /* TYPES SECTION */
-  .types { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  .types-inner { max-width: 960px; margin: 0 auto; padding: 80px 40px; }
-  .types-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 2px; margin-top: 56px; }
-  .type-card {
-    background: var(--bg3); padding: 28px 24px;
-    border: 1px solid var(--border);
-  }
-  .type-glyph { font-size: 28px; color: var(--gold); margin-bottom: 12px; }
-  .type-name { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text); margin-bottom: 6px; }
-  .type-desc { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
+  /* HOW IT WORKS */
+  .how { max-width: 960px; margin: 0 auto; padding: 0 40px 80px; }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 48px; }
+  .step { }
+  .step-num { font-size: 12px; font-weight: 600; color: var(--text-3); letter-spacing: 0.06em; margin-bottom: 10px; }
+  .step-title { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .step-desc { font-size: 13px; color: var(--text-2); line-height: 1.6; }
+  .step-divider { height: 1px; background: var(--border); margin-bottom: 24px; }
 
   /* FREE SECTION */
-  .free-section { max-width: 700px; margin: 0 auto; padding: 100px 40px; text-align: center; }
-  .free-title { font-size: clamp(28px, 4vw, 48px); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text); margin-bottom: 16px; line-height: 1.15; }
-  .free-title span { color: var(--gold); }
-  .free-sub { font-size: 16px; color: var(--text-dim); line-height: 1.7; margin-bottom: 40px; }
-  .free-note { font-size: 12px; color: var(--text-dim); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 16px; }
+  .free-section { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--surface); }
+  .free-inner { max-width: 600px; margin: 0 auto; padding: 80px 40px; text-align: center; }
+  .free-title { font-size: clamp(24px, 3vw, 36px); font-weight: 600; color: var(--text); letter-spacing: -0.01em; margin-bottom: 14px; line-height: 1.2; }
+  .free-sub { font-size: 15px; color: var(--text-2); line-height: 1.7; margin-bottom: 32px; }
+  .free-note { font-size: 12px; color: var(--text-3); margin-top: 14px; }
 
   /* FOOTER */
-  footer {
-    border-top: 1px solid var(--border); padding: 32px 40px;
-    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
-  }
-  .footer-logo { font-size: 13px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-mid); }
-  .footer-links { display: flex; gap: 24px; }
-  .footer-links a { font-size: 13px; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: color 0.2s; }
-  .footer-links a:hover { color: var(--text-dim); }
-  .footer-copy { font-size: 13px; color: var(--text-dim); letter-spacing: 0.06em; }
+  footer { padding: 28px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .footer-logo { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--text-2); }
+  .footer-logo-dot { width: 5px; height: 5px; background: var(--text-2); border-radius: 50%; }
+  .footer-links { display: flex; gap: 20px; }
+  .footer-link { font-size: 12px; color: var(--text-3); transition: color 0.15s; }
+  .footer-link:hover { color: var(--text-2); }
+  .footer-copy { font-size: 12px; color: var(--text-3); }
 
+  /* MOBILE */
   @media (max-width: 640px) {
     nav { padding: 0 20px; }
-    .hero { padding: 60px 20px 60px; }
-    .features, .types-inner, .free-section { padding-left: 20px; padding-right: 20px; }
-    footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; }
+    .hero { padding: 64px 24px 56px; }
+    .features, .how { padding-left: 24px; padding-right: 24px; }
+    .feature-grid { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; gap: 24px; }
+    footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; gap: 16px; }
   }
 </style>
 </head>
 <body>
 
 <nav>
-  <a class="nav-logo" href="#">
-    <span class="nav-logo-line"></span>lapidary<span class="nav-logo-line"></span>
-  </a>
-  <a class="nav-cta" href="https://lapidary.pages.dev">sign in</a>
+  <div class="nav-logo"><div class="nav-logo-dot"></div> Rove</div>
+  <div class="nav-links">
+    <a class="nav-link" href="tos.html">Terms</a>
+    <a class="nav-link" href="privacy.html">Privacy</a>
+    <a class="nav-link" href="contact.html">Contact</a>
+    <a class="nav-cta" href="https://lapidary.pages.dev">Open app</a>
+  </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-eyebrow">
-    <span class="hero-eyebrow-line"></span>
-    your collection, organised
-    <span class="hero-eyebrow-line"></span>
-  </div>
-  <h1 class="hero-title">
-    an easy way to organise<br />your <span>gemstone</span> collection
-  </h1>
-  <p class="hero-sub">
-    Track your stones, bracelets, and gem bundles. Add photos, notes, and descriptions. Filter by category, deity, or intention. Always with you, on any device.
-  </p>
+  <div class="hero-eyebrow">Free · No subscription · No ads</div>
+  <h1 class="hero-title">Manage all your collections digitally in one place</h1>
+  <p class="hero-sub">Rove is a personal collection manager. Create custom tabs for anything you collect, add detailed entries, and access everything from any device.</p>
   <div class="hero-actions">
-    <a class="btn-primary" href="https://lapidary.pages.dev">create free account</a>
-    <a class="btn-ghost" href="https://lapidary.pages.dev">sign in</a>
+    <a class="btn-primary" href="https://lapidary.pages.dev">Get started free</a>
+    <a class="btn-secondary" href="https://lapidary.pages.dev">Sign in</a>
   </div>
+  <div class="hero-note">No credit card required</div>
 </section>
 
-<div class="divider">◈ · · · ◈ · · · ◈</div>
+<div class="section-divider"></div>
 
 <!-- FEATURES -->
 <section class="features">
-  <div class="section-label">features</div>
-  <h2 class="section-title">everything your collection needs</h2>
+  <div class="section-label">Features</div>
+  <h2 class="section-title">Everything you need to manage<br />any collection</h2>
   <div class="feature-grid">
     <div class="feature-card">
       <div class="feature-icon">◈</div>
-      <div class="feature-name">detailed entries</div>
-      <div class="feature-desc">Name, type, subtype, count, description, photos, tags, and categories. Everything you need to remember each stone.</div>
+      <div class="feature-name">Custom tabs</div>
+      <div class="feature-desc">Create a tab for any type of collection — books, plants, gear, anything. Name it whatever you want.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">◉</div>
+      <div class="feature-name">Detailed entries</div>
+      <div class="feature-desc">Add a name, count, description, photos, tags, and categories to every item in your collection.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">◷</div>
+      <div class="feature-name">Photos</div>
+      <div class="feature-desc">Up to 3 photos per entry. Reorder them, view fullscreen — your collection, visually.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">◫</div>
+      <div class="feature-name">Categories & tags</div>
+      <div class="feature-desc">Define your own categories per tab. Add free-form tags for flexible cross-collection organisation.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⌕</div>
+      <div class="feature-name">Search & filter</div>
+      <div class="feature-desc">Search by name, description, tag, or category. Filter and sort your collection instantly.</div>
     </div>
     <div class="feature-card">
       <div class="feature-icon">⊞</div>
-      <div class="feature-name">grid & list views</div>
-      <div class="feature-desc">Browse your collection as a visual gallery or a compact list. Switch instantly depending on what you need.</div>
+      <div class="feature-name">Grid & list views</div>
+      <div class="feature-desc">Browse as a visual photo grid or a compact list. Switch any time depending on what you need.</div>
     </div>
     <div class="feature-card">
-      <div class="feature-icon">🔍</div>
-      <div class="feature-name">search & filter</div>
-      <div class="feature-desc">Filter by type, category, or tag. Search by name or description. Find any stone in seconds.</div>
+      <div class="feature-icon">◧</div>
+      <div class="feature-name">Inventory</div>
+      <div class="feature-desc">A live summary of your entire collection — total counts by type and category breakdown.</div>
     </div>
     <div class="feature-card">
-      <div class="feature-icon">◎</div>
-      <div class="feature-name">gem bundles</div>
-      <div class="feature-desc">Group stones into named bundles — sleep pouches, altar sets, travel kits. Photos pull automatically from the member stones.</div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">📷</div>
-      <div class="feature-name">photo gallery</div>
-      <div class="feature-desc">Up to 3 photos per stone. Reorder them, view full screen, and see multi-photo thumbnails right on the card.</div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">📝</div>
-      <div class="feature-name">collection notes</div>
-      <div class="feature-desc">A personal notes space for your collection. Supports markdown — headings, lists, bold, quotes, and more.</div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">📖</div>
-      <div class="feature-name">history log</div>
-      <div class="feature-desc">Every stone added or removed is logged automatically. A record of your collection over time.</div>
+      <div class="feature-icon">↓</div>
+      <div class="feature-name">Export</div>
+      <div class="feature-desc">Download your entire collection as a CSV file at any time. Your data is always yours.</div>
     </div>
     <div class="feature-card">
       <div class="feature-icon">☁</div>
-      <div class="feature-name">cloud sync</div>
-      <div class="feature-desc">Your collection lives in the cloud. Sign in from any device — phone, tablet, desktop — and everything is there.</div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">✦</div>
-      <div class="feature-name">completely free</div>
-      <div class="feature-desc">No subscription, no premium tier. Lapidary is free to use. If you love it, you can support the project.</div>
+      <div class="feature-name">Cloud sync</div>
+      <div class="feature-desc">Everything synced automatically. Access your collection from any phone, tablet, or computer.</div>
     </div>
   </div>
 </section>
 
-<!-- TYPES -->
-<section class="types">
-  <div class="types-inner">
-    <div class="section-label">collection types</div>
-    <h2 class="section-title">built for how collectors actually collect</h2>
-    <div class="types-grid">
-      <div class="type-card">
-        <div class="type-glyph">◈</div>
-        <div class="type-name">gemstones</div>
-        <div class="type-desc">Raw, tumbled, wand, and more. With subtypes, counts, and full descriptions.</div>
-      </div>
-      <div class="type-card">
-        <div class="type-glyph">○</div>
-        <div class="type-name">bracelets</div>
-        <div class="type-desc">Your wearable collection, tracked separately with their own properties and photos.</div>
-      </div>
-      <div class="type-card">
-        <div class="type-glyph">◎</div>
-        <div class="type-name">gem bundles</div>
-        <div class="type-desc">Groups of stones with a shared purpose — sleep pouches, ritual sets, travel kits.</div>
-      </div>
-      <div class="type-card">
-        <div class="type-glyph">+</div>
-        <div class="type-name">coming soon</div>
-        <div class="type-desc">Custom collection types so you can organise exactly what you have, the way you want.</div>
-      </div>
+<div class="section-divider"></div>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="section-label">How it works</div>
+  <h2 class="section-title">Up and running in minutes</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-divider"></div>
+      <div class="step-num">01</div>
+      <div class="step-title">Create an account</div>
+      <div class="step-desc">Sign up with just an email and password. No credit card, no onboarding, no nonsense.</div>
+    </div>
+    <div class="step">
+      <div class="step-divider"></div>
+      <div class="step-num">02</div>
+      <div class="step-title">Create your first tab</div>
+      <div class="step-desc">Name it anything — books, records, plants, gear. Add as many tabs as you need.</div>
+    </div>
+    <div class="step">
+      <div class="step-divider"></div>
+      <div class="step-num">03</div>
+      <div class="step-title">Start adding entries</div>
+      <div class="step-desc">Add items with photos, descriptions, tags, and categories. Your collection grows with you.</div>
     </div>
   </div>
 </section>
 
-<!-- FREE -->
-<section class="free-section">
-  <h2 class="free-title">free to use.<br /><span>always.</span></h2>
-  <p class="free-sub">Lapidary is and will remain free. No ads, no premium tier, no data selling. If you find it useful, you can buy me a coffee — but there's no pressure.</p>
-  <div class="hero-actions">
-    <a class="btn-primary" href="https://lapidary.pages.dev">get started free</a>
+<!-- FREE SECTION -->
+<div class="free-section">
+  <div class="free-inner">
+    <h2 class="free-title">Free to use.<br />Always.</h2>
+    <p class="free-sub">Rove is and will remain free. No ads, no premium tier, no data selling. Everything you see is everything you get.</p>
+    <a class="btn-primary" href="https://lapidary.pages.dev">Get started free</a>
+    <div class="free-note">No credit card · No subscription · No catch</div>
   </div>
-  <p class="free-note">no credit card · no subscription · no catch</p>
-</section>
+</div>
 
 <footer>
-  <div class="footer-logo">◈ lapidary</div>
+  <div class="footer-logo"><div class="footer-logo-dot"></div> Rove</div>
   <div class="footer-links">
-    <a href="tos.html">terms of service</a>
-    <a href="privacy.html">privacy policy</a>
-    <a href="contact.html">contact</a>
-    <a href="https://lapidary.pages.dev">go to lapidary</a>
+    <a class="footer-link" href="tos.html">Terms of service</a>
+    <a class="footer-link" href="privacy.html">Privacy policy</a>
+    <a class="footer-link" href="contact.html">Contact</a>
+    <a class="footer-link" href="https://lapidary.pages.dev">Go to Rove</a>
   </div>
-  <div class="footer-copy">© 2026 lapidary</div>
+  <div class="footer-copy">© 2026 Rove</div>
 </footer>
 
 </body>
