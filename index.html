@@ -87,12 +87,19 @@
 
   /* MOBILE */
   @media (max-width: 640px) {
-    nav { padding: 0 20px; }
-    .hero { padding: 64px 24px 56px; }
-    .features, .how { padding-left: 24px; padding-right: 24px; }
+    nav { padding: 0 16px; }
+    .nav-links .nav-link { display: none; } /* hide secondary nav links, keep CTA */
+    .hero { padding: 56px 20px 48px; }
+    .hero-title { font-size: clamp(28px, 8vw, 40px); }
+    .hero-sub { font-size: 15px; }
+    .features { padding: 48px 20px; }
+    .how { padding: 48px 20px 56px; }
     .feature-grid { grid-template-columns: 1fr; }
     .steps { grid-template-columns: 1fr; gap: 24px; }
-    footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; gap: 16px; }
+    .free-inner { padding: 56px 20px; }
+    .free-title { font-size: clamp(22px, 7vw, 32px); }
+    footer { padding: 20px 16px; flex-direction: column; align-items: flex-start; gap: 16px; }
+    .footer-links { flex-wrap: wrap; gap: 12px; }
   }
 </style>
 </head>
